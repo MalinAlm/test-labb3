@@ -9,8 +9,8 @@ function MyApp() {
   const [value, onChange] = useState<Value>(new Date());
 
   return (
-    <div>
-      <Calendar onChange={onChange} value={value} />
+    <div id="calendar">
+      <Calendar className="pickDate" onChange={onChange} value={value} />
     </div>
   );
 }
