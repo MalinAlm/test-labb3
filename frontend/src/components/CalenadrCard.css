@@ -9,6 +9,8 @@
 
 .react-calendar {
   background-color: #242424;
+  border-radius: 5px;
+  width: 700px;
 }
 
 .react-calendar__tile--now {
