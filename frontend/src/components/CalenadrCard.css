@@ -1,10 +1,11 @@
 .selected-date {
-  background-color: #88c7f4;
+  /* background-color: rgb(136, 199, 244); */
   color: #fff;
 }
 
-.react-calendar__tile-- {
+.react-calendar__tile--active {
   color: #fff;
+  background-color: rgb(136, 199, 244);
 }
 
 .react-calendar {

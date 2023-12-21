@@ -18,8 +18,8 @@ When("Jag klickar på ett datum", () => {
   cy.get(".react-calendar__viewContainer").within(() => {
     cy.get("button").first().click();
   });
-  // cy.contains(" [data-handler='selectDay'] a", "12").click();
-  // cy.contains(" [aria-label='1 januari 2024'] ", "1").click();
 });
 
-Then("Datumet markeras", () => {});
+Then("Datumet markeras", () => {
+  cy.get(".react-calendar__tile--active");
+});

@@ -27,6 +27,7 @@ function MyApp() {
         value={selectedDate as Value}
         tileClassName={markDateClassName}
       />
+      <p>{selectedDate.toString()}</p>
     </div>
   );
 }
