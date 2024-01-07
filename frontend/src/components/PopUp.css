@@ -1,0 +1,11 @@
+#popup-container {
+  background-color: red;
+  width: 400px;
+  height: 400px;
+}
+
+.popup {
+  background-color: blue;
+  width: 200px;
+  height: 200px;
+}
