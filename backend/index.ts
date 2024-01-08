@@ -1,9 +1,10 @@
 import cors from "cors";
-// import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 import { Client } from "pg";
 import express from "express";
+import path from "path";
 
-// dotenv.config();
+dotenv.config();
 
 const client = new Client({
   connectionString: process.env.PGURI,
@@ -12,18 +13,11 @@ const client = new Client({
 client.connect();
 
 const app = express();
-
+app.use(express.json());
 app.use(cors());
 
-// app.get("/", async (_request, response) => {
-//   // Property 'queryy' does not exist on type 'Client'. Did you mean 'query'?
-//   const { rows } = await client.queryy("SELECT * FROM cities WHERE name = $1", [
-//     "Stockholm",
-//   ]);
+const port = process.env.PORT || 3000;
 
-//   response.send(rows);
-// });
-
-app.listen(3000, () => {
-  console.log("Webbtjänsten kan nu ta emot anrop.");
+app.listen(port, () => {
+  console.log(`Redo på http://localhost:${port}/`);
 });
