@@ -1,11 +1,13 @@
 #popup-container {
-  background-color: red;
-  width: 400px;
+  width: 700px;
   height: 400px;
+  padding-top: 50px;
+  border-radius: 5px;
 }
 
 .popup {
-  background-color: blue;
-  width: 200px;
-  height: 200px;
+  background-color: rgb(163, 163, 255);
+  width: 700px;
+  height: 280px;
+  border-radius: 5px;
 }
