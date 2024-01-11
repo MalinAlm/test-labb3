@@ -1,24 +1,36 @@
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import "./WorkoutForm.css";
+interface WorkoutInterface {
+  inputValue: string;
+}
 
-const WorkoutForm = ({ submitWorkout }) => {
-  function submitHandler(event) {
+const WorkoutForm = () => {
+  const [formInput, setformInput] = useState<WorkoutInterface>({
+    inputValue: "",
+  });
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setformInput({ ...formInput, inputValue: event.target.value });
+  };
+
+  const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-    submitWorkout(event.workoutInput.value);
-  }
+    console.log("input value:", formInput);
+  };
 
   return (
-    <>
-      <div>
-        <div id="workoutForm">
-          <label htmlFor="workoutNote">Notes about workout</label>
-          <input type="text" id="workoutInput" />
-        </div>
-        <button id="workoutBtn" onSubmit={submitHandler} type="submit">
-          Submit
-        </button>
+    <form onSubmit={submitHandler}>
+      <div id="workoutForm">
+        <label htmlFor="workoutNote">Notes about workout: </label>
+        <input
+          id="workoutInput"
+          type="text"
+          value={formInput.inputValue}
+          onChange={handleInputChange}
+        />
       </div>
-    </>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 
