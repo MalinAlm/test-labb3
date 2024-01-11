@@ -38,12 +38,12 @@ app.get("/journal", async (_request: Request, response: Response) => {
 
 app.post("/", async (request: Request, response: Response) => {
   try {
-    const { workout, notes } = request.body;
+    const { date, workout, notes } = request.body;
 
-    await client.query("INSERT INTO journal (workout, notes) VALUES ($1, $2)", [
-      workout,
-      notes,
-    ]);
+    await client.query(
+      "INSERT INTO journal (date, workout, notes) VALUES ($1, $2, $3)",
+      [date, workout, notes]
+    );
     const { rows } = await client.query("SELECT * FROM journal");
     response.status(201).send(rows);
   } catch (error) {
