@@ -17,6 +17,7 @@ client.connect();
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 const port = process.env.PORT || 3000;
@@ -29,11 +30,24 @@ app.get("/", async (_request: Request, response: Response) => {
 });
 
 //lägger till ny endpoint för nytt getanrop
+// app.get("/journal", async (_request: Request, response: Response) => {
+//   const { rows } = await client.query("SELECT * FROM  journal");
+//   console.log(rows, "journal");
+//   response.send(rows);
+// });
 app.get("/journal", async (_request: Request, response: Response) => {
-  const { rows } = await client.query("SELECT * FROM  journal");
-  console.log(rows, "journal");
+  try {
+    const result = await client.query(`
+      SELECT journal.id, journal.date, workout_type.name AS workout_name, journal.notes
+      FROM journal
+      JOIN workout_type ON journal.workout_id = workout_type.id
+    `);
 
-  response.send(rows);
+    response.send(result.rows);
+  } catch (error) {
+    console.error(error);
+    response.status(500).send("Internal server error");
+  }
 });
 
 app.post("/", async (request: Request, response: Response) => {

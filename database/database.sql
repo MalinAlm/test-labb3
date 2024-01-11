@@ -16,7 +16,6 @@ CREATE TABLE journal (
  id serial PRIMARY KEY,
  date Date UNIQUE NOT NULL,
  workout text NOT NULL,
- time text NOT NULL,
  notes text NOT NULL,
  FOREIGN KEY(workout) REFERENCES workout_type(id)
 );
