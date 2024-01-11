@@ -4,6 +4,6 @@ describe("WorkoutForm.cy.tsx", () => {
   it("render input and button", () => {
     cy.mount(<WorkoutForm />);
     cy.get("input").type("testtttt");
-    cy.get("form").submit();
+    cy.get("#workoutBtn").click();
   });
 });
