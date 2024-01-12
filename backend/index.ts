@@ -1,13 +1,9 @@
 import cors from "cors";
-// import dotenv from "dotenv";
 import "dotenv/config";
-// import { Client } from "pg";
 import postgres from "pg";
 import express from "express";
 import path from "path";
 import { Request, Response } from "express";
-
-// dotenv.config();
 
 const client = new postgres.Client({
   connectionString: process.env.PGURI,
@@ -29,23 +25,20 @@ app.get("/", async (_request: Request, response: Response) => {
   response.send(rows);
 });
 
-//lägger till ny endpoint för nytt getanrop
-// app.get("/journal", async (_request: Request, response: Response) => {
-//   const { rows } = await client.query("SELECT * FROM  journal");
-//   console.log(rows, "journal");
-//   response.send(rows);
-// });
+// lägger till ny endpoint för nytt getanrop
 app.get("/journal", async (_request: Request, response: Response) => {
   try {
     const result = await client.query(`
-      SELECT journal.id, journal.date, workout_type.name AS workout_name, journal.notes
-      FROM journal
-      JOIN workout_type ON journal.workout_id = workout_type.id
+    SELECT journal.id, journal.date, journal.workout, journal.notes
+    FROM journal
+    LEFT JOIN workout_type ON journal.workout = workout_type.name;
     `);
 
     response.send(result.rows);
+    console.log("SQL Query:", "SELECT * FROM journal");
   } catch (error) {
     console.error(error);
+    console.error("Error fetching /journal:", error);
     response.status(500).send("Internal server error");
   }
 });
