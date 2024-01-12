@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./CalenadrCard.css";
+import "./CalendarCard.css";
 import PopUp from "./PopUp";
 type ValuePiece = Date | null;
 
@@ -35,11 +35,8 @@ function MyApp() {
   };
 
   const generatePopupContent = (date: Date): string => {
-    return `My workout ${date.toDateString()}`;
+    return `Date: ${date.toDateString()}`;
   };
-
-  // const [value, onChange] = useState<Value>(new Date());
-  // const [selectedDate, setSelectedDate] = useState<Date | Date[]>(new Date());
 
   return (
     <div id="calendar">
@@ -49,7 +46,6 @@ function MyApp() {
         value={selectedDate as Value}
         tileClassName={markDateClassName}
       />
-      {/* <p>{selectedDate.toString()}</p> */}
       <PopUp
         popupOpen={popupIsOpen}
         closePopup={closingPopup}

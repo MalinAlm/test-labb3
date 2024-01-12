@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import Journal from "./components/Journal";
+import Journal from "./pages/Journal";
 
 function Root() {
   return (

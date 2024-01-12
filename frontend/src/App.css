@@ -15,3 +15,17 @@
 .linkStyle {
   color: rgb(184, 255, 229);
 }
+
+#renderDiv {
+  background-color: rgb(246, 238, 255);
+  color: black;
+  height: 180px;
+  width: 300px;
+  border-radius: 5px;
+  padding-top: 25px;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+}
