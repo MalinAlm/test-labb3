@@ -21,17 +21,11 @@ function PopUp({ popupOpen, closePopup, popupDate }: PopupProps) {
       .then((result: Workout[]) => {
         console.log("Result:", result);
         setworkoutTypes(result);
-        console.log("workoutTypes:", workoutTypes);
       })
       .catch((error) => {
         console.log("Error fetching workoutTypes", error);
       });
   }, []);
-
-  if (!popupOpen) return null;
-  console.log("popupOpen:", popupOpen);
-  console.log("closePopup:", closePopup);
-  console.log("Popup:", PopUp);
 
   return (
     <div id="popup-container">
@@ -50,8 +44,6 @@ function PopUp({ popupOpen, closePopup, popupDate }: PopupProps) {
         <div id="inputWorkoutNotes">
           <WorkoutForm />
         </div>
-        <p>Input form med post till workoutTypesbas HÄÄÄR ^</p>
-        {/* <p>Popup is {popupOpen ? "visible" : "hidden"}</p> */}
       </div>
     </div>
   );

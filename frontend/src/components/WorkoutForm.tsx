@@ -21,7 +21,7 @@ const WorkoutForm = () => {
   return (
     <form onSubmit={submitHandler}>
       <div id="workoutForm">
-        <label htmlFor="workoutNote">Notes about workout: </label>
+        <label htmlFor="workoutNote">Comment about workout: </label>
         <input
           id="workoutInput"
           type="text"
@@ -29,7 +29,9 @@ const WorkoutForm = () => {
           onChange={handleInputChange}
         />
       </div>
-      <button type="submit">Submit</button>
+      <button id="workoutSubmitBtn" type="submit">
+        Submit
+      </button>
     </form>
   );
 };
