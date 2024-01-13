@@ -35,11 +35,11 @@ function PopUp({ popupOpen, closePopup, popupDate }: PopupProps) {
         </span>
         <h1>{popupDate}</h1>
 
-        <div>
+        <select>
           {workoutTypes.map((workout) => (
-            <p key={workout.id}> {workout.name}</p>
+            <option key={workout.id}> {workout.name}</option>
           ))}
-        </div>
+        </select>
 
         <div id="inputWorkoutNotes">
           <WorkoutForm />
