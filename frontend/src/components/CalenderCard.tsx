@@ -12,7 +12,7 @@ interface calendarTileProperties {
   view: string;
 }
 
-function MyApp() {
+function CalenderCard() {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Value>(new Date());
 
@@ -54,4 +54,4 @@ function MyApp() {
     </div>
   );
 }
-export default MyApp;
+export default CalenderCard;

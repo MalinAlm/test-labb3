@@ -14,6 +14,8 @@ interface Workout {
 
 function PopUp({ popupOpen, closePopup, popupDate }: PopupProps) {
   const [workoutTypes, setworkoutTypes] = useState<Workout[]>([{ name: "" }]);
+  const [selectedWorkout, setSelectedWorkout] = useState<Workout>();
+  const [selectedDateInput, setSelectedDateInput] = useState(popupDate);
 
   useEffect(() => {
     fetch("/api")
@@ -26,6 +28,12 @@ function PopUp({ popupOpen, closePopup, popupDate }: PopupProps) {
         console.log("Error fetching workoutTypes", error);
       });
   }, []);
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = parseInt(event.target.value, 10);
+
+    const selected = workoutTypes.find((workout) => workout.id === selectedId);
+    setSelectedWorkout(selected);
+  };
 
   return (
     <div id="popup-container">
@@ -35,14 +43,20 @@ function PopUp({ popupOpen, closePopup, popupDate }: PopupProps) {
         </span>
         <h1>{popupDate}</h1>
 
-        <select>
+        <select onChange={handleSelectChange}>
           {workoutTypes.map((workout) => (
-            <option key={workout.id}> {workout.name}</option>
+            <option key={workout.id} value={workout.id}>
+              {" "}
+              {workout.name}
+            </option>
           ))}
         </select>
 
         <div id="inputWorkoutNotes">
-          <WorkoutForm />
+          <WorkoutForm
+            selectDate={selectedDateInput}
+            selectWorkout={selectedWorkout}
+          />
         </div>
       </div>
     </div>
