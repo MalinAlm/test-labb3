@@ -35,7 +35,7 @@ function CalenderCard() {
   };
 
   const generatePopupContent = (date: Date): string => {
-    return `Date: ${date.toDateString()}`;
+    return ` ${date.toDateString()}`;
   };
 
   return (

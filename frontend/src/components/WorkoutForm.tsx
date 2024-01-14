@@ -1,6 +1,5 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import "./WorkoutForm.css";
-import PopUp from "./PopUp";
 interface WorkoutInterface {
   inputValue: string;
 }
@@ -14,10 +13,16 @@ interface WorkoutFormProps {
   selectDate: string;
 }
 
+interface PostData {
+  date: string;
+  workout: string;
+  notes: string;
+}
+
 const WorkoutForm: React.FC<WorkoutFormProps> = ({
   selectWorkout,
   selectDate,
-}: WorkoutFormProps) => {
+}) => {
   const [formInput, setformInput] = useState<WorkoutInterface>({
     inputValue: "",
   });
@@ -28,11 +33,43 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-    console.log("input value:", formInput);
+
+    const formDataPost: PostData = {
+      date: selectDate,
+      workout: selectWorkout ? selectWorkout.name : "",
+      notes: formInput.inputValue,
+    };
+    console.log("formDataPost:", formDataPost);
+    console.log("selectDate", selectDate);
+    console.log("formInput.inputValue:", formInput.inputValue);
+    console.log(
+      `selectWorkout ? selectWorkout.name : ""`,
+      selectWorkout ? selectWorkout.name : ""
+    );
+
+    fetch("/api/journal", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(formDataPost),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to submit data: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((updatedFormData) => {
+        console.log("updatedFormData:", updatedFormData);
+      })
+      .catch((error) => {
+        console.error("Error, submit not working", error);
+      });
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form method="POST" onSubmit={submitHandler}>
       <div id="workoutForm">
         <input type="text" value={selectDate} readOnly />
         <input

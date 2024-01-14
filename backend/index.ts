@@ -43,7 +43,7 @@ app.get("/journal", async (_request: Request, response: Response) => {
   }
 });
 
-app.post("/", async (request: Request, response: Response) => {
+app.post("/journal", async (request: Request, response: Response) => {
   try {
     const { date, workout, notes } = request.body;
 
