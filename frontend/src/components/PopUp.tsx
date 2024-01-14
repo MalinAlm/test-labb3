@@ -28,12 +28,19 @@ function PopUp({ popupOpen, closePopup, popupDate }: PopupProps) {
         console.log("Error fetching workoutTypes", error);
       });
   }, []);
+
+  useEffect(() => {
+    setSelectedDateInput(popupDate);
+  }, [popupDate]);
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = parseInt(event.target.value, 10);
 
     const selected = workoutTypes.find((workout) => workout.id === selectedId);
     setSelectedWorkout(selected);
   };
+
+  if (!popupOpen) return null;
 
   return (
     <div id="popup-container">
